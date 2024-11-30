@@ -1,0 +1,62 @@
+Problem statement
+You are given an array of ‘N’ integers where each integer value is between ‘1’ and ‘N’. Each integer appears exactly once except for ‘P’, which appears exactly twice, and ‘Q’, which is missing.
+
+Your task is to find ‘P’ and ‘Q’ and return them respectively.
+
+1) Brute - We will declare two variables and iterate over the array using two for loops and keep track of the count 
+
+2) Better - We will use a hash array and keep the count of numbers and return the counts 
+
+Code 
+
+vector<int> findMissingRepeatingNumbers(vector < int > a) {
+    int n = a.size();
+    int hash[n+1] = {0};
+
+    for(int i = 0; i<n; i++){
+        hash[a[i]]++;
+    }
+
+    int rep = -1;
+    int miss = -1;
+    for(int i = 1; i<=n; i++){
+        if(hash[i] == 2) rep = i;
+        else if(hash[i] == 0) miss = i;
+        if( rep != -1 && miss != -1){
+        break;
+    }
+    }
+    return {rep, miss};
+}
+
+3) Optimal - We use matehmatical formulas to find sum and sum of squares to find two equation to calculate x and y as missing and repeating numbers 
+
+Code 
+
+vector<int> findMissingRepeatingNumbers(vector < int > a) {
+    long long n = a.size();
+    long long sum_n = (n*(n+1))/2;
+    long long sqSum_n = (n*(n+1)*(2*n+1))/6;
+    long long sum = 0;
+    long long sqSum = 0;
+    for(int i = 0; i<n; i++){
+        sum += a[i];
+        sqSum += (long long)a[i]*(long long)a[i];
+    }
+
+    long long val1 = sum - sum_n; // x-y
+    long long val2 = sqSum - sqSum_n;
+    val2 = val2/val1; // x+y
+    long long x = (val1 + val2)/2;
+    long long y = x - val1;
+    
+    return {(int)x, (int)y};
+}
+
+
+
+
+
+
+
+
