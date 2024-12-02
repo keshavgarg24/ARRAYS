@@ -1,0 +1,24 @@
+Problem statement
+There is an integer array ‘A’ of size ‘N’.
+
+Number of inversions in an array can be defined as the number of pairs of ‘i’, ‘j’ such that ‘i’ < ‘j’ and ‘A[i]’ > ‘A[j]’.
+You must return the number of inversions in the array.
+
+1) Brute - We will generate all the pairs and if the condition is met , we will increse the count and at end return the count 
+
+Code 
+
+int numberOfInversions(vector<int>&a, int n) {
+    int cnt = 0;
+    for(int i = 0; i<n; i++){
+        for(int j = i+1; j<n; j++){
+            if(a[i]>a[j]) cnt++;
+        }
+    }
+    return cnt;
+}
+
+2) Optomal - 
+
+
+
